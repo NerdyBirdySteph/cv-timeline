@@ -1,0 +1,239 @@
+// bower:scss
+// endbower
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fafafa;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+  min-height: 100%;
+}
+
+$white: #fff;
+$dark-blue: #556271;
+$turquoise: #47CDC5;
+$lime: darken(#C6F659,20%);
+$pink: #FF6A67;
+$red: #C64C56;
+
+$timeline-height: 30px;
+$timeline-width: 2000px;
+$timeline-color-start: darken($dark-blue,15%);
+$timeline-color-end: lighten($dark-blue,15%);
+
+$event-width: 170px;
+
+$headline-color: #555;
+$text-color: #777;
+$link-color: $text-color;
+$link-hover-color: $text-color;
+
+.cv {
+
+}
+
+.info {
+  padding: 25px;
+}
+
+.info-photo {
+  border-radius: 50%;
+  height: 200px;
+  margin-right: 25px;
+  float: left;
+  shape-outside: circle();
+  border: 1px solid $lime;
+  box-shadow: 0 0 1px $pink;
+}
+
+.info-summary {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: $headline-color;
+}
+
+.info-personal {
+  margin-top: 0;
+  max-width: 750px;
+  font-size: 15px;
+  color: $text-color;
+}
+
+.timeline-wrapper {
+  width: auto;
+  height: 700px;
+  position: relative;
+  padding-left: 25px;
+  padding-right: 25px;
+  width: $timeline-width;
+}
+
+.timeline {
+  width: $timeline-width;
+  height: $timeline-height;
+  //background: $dark-blue;
+  background: linear-gradient(to right, $timeline-color-start, $timeline-color-end);
+  position: absolute;
+  top: 50%;
+  margin-top: -($timeline-height / 2);
+  z-index: -1;
+  margin-left: -15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  transform: skewX(-35deg);
+  border-radius: 3px;
+  display: flex;
+  > * {
+    flex: 1;
+    transform: skewX(35deg);
+  }
+}
+
+.timeline-marker {
+  color: $white;
+  line-height: $timeline-height;
+  text-align: left;
+  &.short {
+    flex: 0.5;
+  }
+}
+
+.timeline-jump {
+  display: block;
+  height: $timeline-height;
+  max-width: 30px;
+  background: transparent;
+  border-right: 3px solid $white;
+  border-left: 3px solid $white;
+  position: relative;
+  transform: skewX(0deg);
+  margin-left: 10px;
+  margin-right: 10px;
+
+  &:before, &:after {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 100%;
+    background: $white;
+    position: absolute;
+  }
+  &:before {
+    left: 7px;
+  }
+  &:after {
+    right: 7px;
+  }
+}
+
+.event {
+  border-left: 2px solid red;
+  padding-left: 5px;
+  position: absolute;
+  top: 50%;
+  margin-top: -($timeline-height / 2);
+  max-width: $event-width;
+  min-height: 100px;
+}
+
+.event-left {
+  padding-left: 0;
+  text-align: right;
+  .event-month {
+    left: 13px;
+  }
+  .event-description,
+  .event-title {
+    transform: translateX(-100%);
+    position: relative;
+    left: -5px;
+  }
+}
+
+.event-month {
+  text-transform: uppercase;
+  transform-origin: 0 0;
+  transform: rotate(-90deg) translate(-100%,-100%);
+  position: absolute;
+  left: 2px;
+}
+
+.event-title {
+  font-weight: 500;
+  font-size: 14px;
+  color: $headline-color;
+  margin-bottom: 3px;
+}
+
+.event-description {
+  font-size: 13px;
+  color: $text-color;
+  line-height: 130%;
+  position: relative;
+  z-index: 2;
+}
+
+.event-description-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%,-50%);
+  opacity: 0.3;
+}
+
+.event:nth-of-type(even) {
+  transform: translateY(-100%);
+  padding-bottom: $timeline-height;
+}
+.event:nth-of-type(odd) {
+  transform: translateY($timeline-height);
+  padding-top: $timeline-height;
+
+  .event-month {
+    top: 100%;
+    transform: rotate(-90deg) translate(0,-100%);
+  }
+}
+
+.event:nth-of-type(4n) {
+  border-left-color: $turquoise;
+  .event-month {
+    color: $turquoise;
+  }
+}
+.event:nth-of-type(4n+1) {
+  border-left-color: $lime;
+  .event-month {
+    color: $lime;
+  }
+}
+.event:nth-of-type(4n+2) {
+  border-left-color: $pink;
+  .event-month {
+    color: $pink;
+  }
+}
+.event:nth-of-type(4n+3) {
+  border-left-color: $red;
+  .event-month {
+    color: $red;
+  }
+}
+
+.event a:link,
+.event a:visited {
+  color: $link-color;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba($link-color,0.5);
+}
+.event a:hover,
+.event a:active {
+  border-bottom-style: solid;
+  border-bottom-color: $link-hover-color;
+  color: $link-hover-color;
+}
